@@ -10,7 +10,24 @@
   </head>
   <body>
     <div class="main w-full min-h-screen bg-zinc-900">
-      <h1>Helllooo</h1>
+      <div class="form p-10 text-white">
+        <form action="">
+          <input
+            class="block w-full rounded-md outline-none px-5 py-2 bg-zinc-800"
+            type="text"
+            placeholder="Title goes here."
+          />
+          <textarea
+            class="block w-full rounded-md outline-none mt-2 px-5 py-2 bg-zinc-800 resize-none"
+            placeholder="Enter your task details here."
+          ></textarea>
+          <button
+            class="mt-4 bg-blue-600 px-5 py-2 rounded-md hover:bg-blue-700 cursor-pointer transition delay-100 duration-200 ease-in hover:-translate-y-1 active:translate-y-1"
+          >
+            Create task
+          </button>
+        </form>
+      </div>
     </div>
   </body>
 </html>
