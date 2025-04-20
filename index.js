@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const fs = require("fs");
 
 const server = express();
 
@@ -15,16 +16,51 @@ server.set("view engine", "ejs");
 
 //routes
 server.get("/", (req, res) => {
-  res.render("index");
+  fs.readdir("./files", (err, files) => {
+    if (err) console.log("error reading directory called files.");
+    else console.log(files);
+    res.render("index", { files: files });
+  });
   //   const people = ["daud", "saad", "hafsa", "bilal"];
   //   res.render("index", { people: people });
 });
 
-server.get("/profile/:username", (req, res) => {
-  const name = req.params.username;
-  res.send(
-    `Hello ${name}! </br> Congratulations your profile has been activated.`
-  );
+server.post("/create", (req, res) => {
+  const fileName = req.body.title
+    .split(" ")
+    .map((el, index) => {
+      let firstCharacter, remainingCharacters;
+      if (index === 0) {
+        firstCharacter = el.slice(0, 1).toLowerCase();
+        remainingCharacters = el.slice(1).toLowerCase();
+      } else {
+        firstCharacter = el.slice(0, 1).toUpperCase();
+        remainingCharacters = el.slice(1).toLowerCase();
+      }
+      return firstCharacter + remainingCharacters;
+    })
+    .join("");
+
+  fs.writeFile(`./files/${fileName}.txt`, req.body.description, (err) => {
+    if (err) console.log("Failed to create a file. ", err);
+    res.redirect("/");
+  });
+});
+
+server.get("/tasks/:title", (req, res) => {
+  const fileName = req.params.title;
+  const title = fileName
+    .split(".")[0]
+    .replace(/([A-Z])/g, " $1") // Add space before capital letters
+    .replace(/^./, (c) => c.toUpperCase()) // Capitalize first character
+    .trim();
+
+  fs.readFile(`./files/${fileName}.txt`, "utf-8", (err, data) => {
+    if (err) console.log(`Error reading file named: ${fileName}.txt `);
+    else console.log(data);
+  });
+
+  res.send(`Title: ${title}`);
 });
 
 //listening
