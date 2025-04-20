@@ -1,16 +1,13 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-
 const server = express();
 
 //setting up parsers for form
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
-
 //setting up public static fie
 server.use(express.static(path.join(__dirname, "public")));
-
 //setting up ejs for ejs pages
 server.set("view engine", "ejs");
 
@@ -18,7 +15,7 @@ server.set("view engine", "ejs");
 server.get("/", (req, res) => {
   fs.readdir("./files", (err, files) => {
     if (err) console.log("error reading directory called files.");
-    else console.log(files);
+    
     res.render("index", { files: files });
   });
   //   const people = ["daud", "saad", "hafsa", "bilal"];
@@ -47,8 +44,8 @@ server.post("/create", (req, res) => {
   });
 });
 
-server.get("/tasks/:title", (req, res) => {
-  const fileName = req.params.title;
+server.get("/tasks/:fileName", (req, res) => {
+  const fileName = req.params.fileName;
   const title = fileName
     .split(".")[0]
     .replace(/([A-Z])/g, " $1") // Add space before capital letters
@@ -57,10 +54,10 @@ server.get("/tasks/:title", (req, res) => {
 
   fs.readFile(`./files/${fileName}.txt`, "utf-8", (err, data) => {
     if (err) console.log(`Error reading file named: ${fileName}.txt `);
-    else console.log(data);
+    else {
+      res.render("show", { title: title, description: data });
+    }
   });
-
-  res.send(`Title: ${title}`);
 });
 
 //listening

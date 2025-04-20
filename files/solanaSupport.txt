@@ -1,0 +1,1 @@
+Add support for solana transaction on lunar link via phantom. Should be able to send native solana to catena OR catena to solana. Make sure that both direct and indirect pairs are supported
