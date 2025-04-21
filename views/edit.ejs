@@ -16,10 +16,10 @@
         style="text-underline-offset: 4px"
         >Back</a
       >
-      <div class="form text-white">
+      <div class="form text-white w-full">
         <form action="/edit" method="post">
-          <input
-            class="block w-1/4 rounded-md outline-none px-5 py-2 bg-zinc-800"
+            <input
+            class="block w-full sm:w-1/2 lg:w-1/4 rounded-md outline-none px-5 py-2 bg-zinc-800"
             type="text"
             placeholder="Current name."
             name="previous"
@@ -27,13 +27,13 @@
             readonly
           />
           <input
-            class="block w-1/4 rounded-md outline-none mt-2 px-5 py-2 bg-zinc-800"
+            class="block w-full sm:w-1/2 lg:w-1/4 rounded-md outline-none mt-2 px-5 py-2 bg-zinc-800"
             type="text"
             placeholder="New name."
             name="new"
           />
           <textarea
-            class="block w-1/4 h-[200px] rounded-md outline-none mt-2 px-5 py-2 bg-zinc-800 resize-y max-h-[calc(100vh-308px)] min-h-[200px]"
+            class="block w-full sm:w-1/2 lg:w-1/4 h-[200px] rounded-md outline-none mt-2 px-5 py-2 bg-zinc-800 resize-y max-h-[calc(100vh-308px)] min-h-[200px] max-w-full"
             placeholder="Description"
             name="description"
           ><%= description%></textarea>
