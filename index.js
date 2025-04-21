@@ -60,6 +60,32 @@ server.get("/tasks/:fileName", (req, res) => {
   });
 });
 
+server.get(`/edit/:fileName`, (req, res) => {
+  const fileName = req.params.fileName;
+  fs.readFile(`./files/${fileName}.txt`, 'utf8', (err, data) => {
+    if (err) {
+      console.log(`Error reading file named: ${fileName}.txt `);
+      return;
+    }
+    res.render('edit', { fileName: fileName + '.txt', description: data })
+
+  });
+})
+
+server.post('/edit', (req, res) => {
+  const fileName = req.body.previous
+  fs.writeFileSync(`./files/${fileName}`, req.body.description, 'utf-8', (err) => {
+    if (err) {
+      console.log(`Failed to update a file named: ${fileName}`)
+      return
+    }
+  })
+  fs.rename(`./files/${fileName}`, `./files/${req.body.new}`, (err) => {
+    if (err) console.log('Failed to rename the file named: ' + fileName);
+  })
+  res.redirect('/')
+})
+
 //listening
 server.listen(3000, () => {
   console.log("listening...");

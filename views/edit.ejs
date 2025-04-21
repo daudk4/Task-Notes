@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script defer src="/javascripts/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <div class="main w-full min-h-screen bg-zinc-900 p-10">
+      <a
+        href="/"
+        class="text-blue-500 inline-block mb-12 underline"
+        style="text-underline-offset: 4px"
+        >Back</a
+      >
+      <div class="form text-white">
+        <form action="/edit" method="post">
+          <input
+            class="block w-1/4 rounded-md outline-none px-5 py-2 bg-zinc-800"
+            type="text"
+            placeholder="Current name."
+            name="previous"
+            value="<%= fileName%>"
+            readonly
+          />
+          <input
+            class="block w-1/4 rounded-md outline-none mt-2 px-5 py-2 bg-zinc-800"
+            type="text"
+            placeholder="New name."
+            name="new"
+          />
+          <textarea
+            class="block w-1/4 h-[200px] rounded-md outline-none mt-2 px-5 py-2 bg-zinc-800 resize-y max-h-[calc(100vh-308px)] min-h-[200px]"
+            placeholder="Description"
+            name="description"
+          ><%= description%></textarea>
+          <button
+            class="mt-4 bg-yellow-600 px-5 py-2 rounded-md hover:bg-blue-700 cursor-pointer transition delay-100 duration-200 ease-in hover:-translate-y-1 active:translate-y-1"
+          >
+            Update
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -36,7 +36,10 @@
           <h1 class="text-white text-3xl tracking-tighter">
             <%= file%>
           </h1>
-          <a href="/tasks/<%=file.split('.')[0]%>" class="text-blue-500 inline-block mt-2">Read more.</a>
+          <div class="flex w-full justify-between items-center mt-2">
+            <a href="/tasks/<%=file.split('.')[0]%>" class="text-blue-500 inline-block ">Read more.</a>
+            <a href="/edit/<%=file.split('.')[0]%>" class="text-zinc-500 inline-block ">Edit.</a>
+          </div>
         </div>
         <% }) %> <% }else{%>
         <h3 class="w-full text-zinc-600 text-[20px] text-center">
