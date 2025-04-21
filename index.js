@@ -15,7 +15,7 @@ server.set("view engine", "ejs");
 server.get("/", (req, res) => {
   fs.readdir("./files", (err, files) => {
     if (err) console.log("error reading directory called files.");
-    
+
     res.render("index", { files: files });
   });
   //   const people = ["daud", "saad", "hafsa", "bilal"];
@@ -86,6 +86,13 @@ server.post('/edit', (req, res) => {
   res.redirect('/')
 })
 
+server.get('/delete/:fileName', (req,res)=>{
+ const fileName = req.params.fileName
+ fs.unlink(`./files/${fileName}`,(err)=>{
+  if(err) console.log(`Failed to delete a file named: ${fileName}`);
+ })
+  res.redirect('/')
+})
 //listening
 server.listen(3000, () => {
   console.log("listening...");

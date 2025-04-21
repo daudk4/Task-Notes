@@ -33,6 +33,9 @@
       <div class="tasks w-full flex gap-3 flex-wrap p-10">
         <% if(files.length>0){%> <% files.forEach((file)=>{%>
         <div class="task min-w-fit px-3 py-4 rounded-md bg-zinc-800">
+          <a href="/delete/<%=file%>" class="inline-block mb-1">
+            <img src="/images/deleteIcon.svg" alt="delete-icon" style="filter: invert(24%) sepia(97%) saturate(7470%) hue-rotate(351deg) brightness(92%) contrast(102%);"/>
+           </a>
           <h1 class="text-white text-3xl tracking-tighter">
             <%= file%>
           </h1>
