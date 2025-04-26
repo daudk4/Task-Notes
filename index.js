@@ -74,15 +74,29 @@ server.get(`/edit/:fileName`, (req, res) => {
 
 server.post('/edit', (req, res) => {
   const fileName = req.body.previous
+  const newName = req.body.new
+    .split(" ")
+    .map((el, index) => {
+      let firstCharacter, remainingCharacters;
+      if (index === 0) {
+        firstCharacter = el.slice(0, 1).toLowerCase();
+        remainingCharacters = el.slice(1).toLowerCase();
+      } else {
+        firstCharacter = el.slice(0, 1).toUpperCase();
+        remainingCharacters = el.slice(1).toLowerCase();
+      }
+      return firstCharacter + remainingCharacters;
+    })
+    .join("");
   fs.writeFileSync(`./files/${fileName}`, req.body.description, 'utf-8', (err) => {
     if (err) {
       console.log(`Failed to update a file named: ${fileName}`)
       return
     }
   })
-  fs.rename(`./files/${fileName}`, `./files/${req.body.new}`, (err) => {
-    if (err) console.log('Failed to rename the file named: ' + fileName);
-  })
+  fs.rename(`./files/${fileName}`, `./files/${newName}.txt`, (err) => {
+    if (err) console.log("Failed to rename the file named: " + fileName);
+  });
   res.redirect('/')
 })
 
